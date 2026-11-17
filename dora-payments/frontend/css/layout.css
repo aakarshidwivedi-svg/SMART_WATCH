@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-space);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Control Toolbar for previewing modes */
+.mode-bar {
+  position: fixed;
+  top: 16px;
+  display: flex;
+  gap: 12px;
+  background: rgba(20, 26, 40, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: var(--border-glow);
+  z-index: 1000;
+}
+
+.mode-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active, .mode-btn:hover {
+  background: rgba(0, 243, 255, 0.15);
+  color: var(--primary-cyan);
+  border-color: var(--primary-cyan);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* DORA Display Container */
+.dora-viewport {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Watch Layout: Circular / ESP32 240x240 */
+[data-mode="watch"] .dora-viewport {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-watch-bezel);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(0, 243, 255, 0.1);
+  background: radial-gradient(circle at center, #111827 0%, #06090e 100%);
+  padding: 24px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hologram Simulation Layout: High-res projection */
+[data-mode="hologram"] .dora-viewport {
+  width: 380px;
+  height: 600px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  background: rgba(11, 16, 28, 0.82);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 40px rgba(0, 243, 255, 0.2), inset 0 0 20px rgba(0, 243, 255, 0.05);
+  padding: 24px 20px;
+}
+
+/* Hologram scanline effect */
+[data-mode="hologram"] .dora-viewport::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 243, 255, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Screen Transitions */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Component Styling */
+.badge {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--primary-cyan);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-cyan);
+  margin-bottom: 6px;
+}
+
+.balance-title {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.balance-amount {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin: 4px 0 12px 0;
+}
+
+.action-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn {
+  background: rgba(0, 243, 255, 0.1);
+  color: var(--primary-cyan);
+  border: 1px solid var(--primary-cyan);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  background: var(--primary-cyan);
+  color: #000;
+}
+
+.btn-primary {
+  background: var(--primary-cyan);
+  color: #040810;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.btn-danger {
+  border-color: var(--danger-red);
+  color: var(--danger-red);
+  background: rgba(255, 51, 102, 0.1);
+}
+
+/* PIN Keypad */
+.pin-display {
+  letter-spacing: 10px;
+  font-size: 24px;
+  color: var(--primary-cyan);
+  min-height: 32px;
+  margin: 8px 0;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 190px;
+}
+
+.key-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.key-btn:active {
+  background: var(--primary-cyan);
+  color: #000;
+}
+
+/* Hologram Status Pulses */
+.holo-pulse {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--success-green) 0%, transparent 70%);
+  animation: pulse 1.5s infinite;
+  margin: 12px auto;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+  100% { transform: scale(0.85); opacity: 0.5; }
+}
+
+.status-msg {
+  font-size: 13px;
+  color: var(--text-muted);
+}

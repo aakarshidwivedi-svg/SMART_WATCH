@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DORA Universal Payment Mode</title>
+  <link rel="stylesheet" href="/static/css/theme.css">
+  <link rel="stylesheet" href="/static/css/layout.css">
+</head>
+<body data-mode="watch">
+
+  <!-- Top toolbar for toggling watch vs hologram perspective -->
+  <div class="mode-bar">
+    <button class="mode-btn active" data-target="watch">Watch UI (Round)</button>
+    <button class="mode-btn" data-target="hologram">Hologram Simulation</button>
+  </div>
+
+  <!-- Main Viewport -->
+  <div class="dora-viewport">
+
+    <!-- Screen 1: Home / Balance Screen -->
+    <div id="screen-home" class="screen active">
+      <div>
+        <div class="badge">DORA PAY</div>
+        <div class="balance-title">Wallet Balance</div>
+        <div class="balance-amount wallet-val">₹--.--</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px; width:100%; max-width:200px;">
+        <button class="btn btn-primary" onclick="initiatePayment('Dora Cyber Cafe', 15000)">
+          ⚡ Pay ₹150 (Tap)
+        </button>
+        <button class="btn" onclick="initiatePayment('Metro Transit Gate', 4500, 'NFC_TAP')">
+          📶 Metro ₹45 (NFC)
+        </button>
+        <button class="btn" onclick="topUpDemo()">
+          + Add ₹500
+        </button>
+      </div>
+      
+      <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">PIN: 1234 (Demo)</div>
+    </div>
+
+    <!-- Screen 2: PIN Authorization Screen -->
+    <div id="screen-pin" class="screen">
+      <div style="margin-top:2px;">
+        <div id="confirm-merchant" style="font-size:12px; font-weight:600; color:var(--primary-cyan);">Merchant</div>
+        <div id="confirm-amt" style="font-size:18px; font-weight:bold; margin-top:2px;">₹0.00</div>
+        <div id="pin-dots" class="pin-display"></div>
+        <div id="pin-error" style="color:var(--danger-red); font-size:11px; min-height:14px;"></div>
+      </div>
+
+      <!-- Numeric Keypad -->
+      <div class="keypad">
+        <button class="key-btn" data-key="1">1</button>
+        <button class="key-btn" data-key="2">2</button>
+        <button class="key-btn" data-key="3">3</button>
+        <button class="key-btn" data-key="4">4</button>
+        <button class="key-btn" data-key="5">5</button>
+        <button class="key-btn" data-key="6">6</button>
+        <button class="key-btn" data-key="7">7</button>
+        <button class="key-btn" data-key="8">8</button>
+        <button class="key-btn" data-key="9">9</button>
+        <button class="key-btn" data-key="C" style="color:var(--danger-red);">✕</button>
+        <button class="key-btn" data-key="0">0</button>
+        <button class="key-btn" data-key="OK" style="color:var(--success-green); font-size:12px;">OK</button>
+      </div>
+
+      <button class="btn btn-danger" style="padding:4px 10px; font-size:11px; margin-top:6px;" onclick="cancelCurrent()">Cancel</button>
+    </div>
+
+    <!-- Screen 3: Payment Success Screen -->
+    <div id="screen-success" class="screen">
+      <div class="holo-pulse"></div>
+      <div>
+        <div style="font-size:16px; font-weight:bold; color:var(--success-green);">Payment Successful</div>
+        <div id="success-amt" style="font-size:22px; font-weight:800; margin:6px 0;">₹0.00</div>
+        <div id="success-merchant" style="font-size:12px; color:var(--text-muted);">Merchant</div>
+      </div>
+      <button class="btn btn-primary" onclick="showScreen('screen-home')" style="width:140px; margin-top:12px;">Done</button>
+    </div>
+
+  </div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
