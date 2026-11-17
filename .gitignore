@@ -9,3 +9,4 @@ dora-payments/backend/tests/__pycache__/
 holowatch/__pycache__/
 tests/__pycache__/
 
+.vercel
