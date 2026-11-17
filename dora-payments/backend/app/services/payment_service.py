@@ -13,6 +13,11 @@ from app.providers.mock_provider import MockProvider
 from app.core.security import verify_pin, hash_pin
 from app.core.events import event_bus
 
+def _as_utc(dt: datetime) -> datetime:
+    """Normalize naive datetimes loaded from SQLite as UTC-aware."""
+    return dt if dt.tzinfo is not None else dt.replace(tzinfo=timezone.utc)
+
+
 class PaymentService:
     def __init__(self, session: Session):
         self.session = session
@@ -127,7 +132,7 @@ class PaymentService:
 
         now_utc = datetime.now(timezone.utc)
         # Check expiration (60s default)
-        if now_utc > txn.expires_at:
+        if now_utc > _as_utc(txn.expires_at):
             txn.state = PaymentState.EXPIRED
             txn.failure_reason = "Payment request expired"
             self.session.commit()
@@ -136,8 +141,8 @@ class PaymentService:
 
         # Check PIN lockout & verify
         sec = self.get_or_create_security(user_id)
-        if sec.locked_until and sec.locked_until > now_utc:
-            remaining_mins = int((sec.locked_until - now_utc).total_seconds() // 60) + 1
+        if sec.locked_until and _as_utc(sec.locked_until) > now_utc:
+            remaining_mins = int((_as_utc(sec.locked_until) - now_utc).total_seconds() // 60) + 1
             raise DoraPaymentException(
                 code="PIN_LOCKED",
                 message=f"PIN entry locked due to multiple failed attempts. Try again in {remaining_mins} minutes."

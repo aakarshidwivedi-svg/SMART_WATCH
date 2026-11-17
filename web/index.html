@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartWatch X — Unified Futuristic Prototype</title>
+  <link rel="stylesheet" href="/assets/css/dashboard.css" />
+</head>
+<body>
+  <!-- Ambient futuristic grid & glow backdrop -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-cyan" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-blue" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <!-- ==================== UNIFIED TOP NAVIGATION BAR ==================== -->
+    <header class="top-header glass-surface">
+      <div class="brand" id="brand-home" role="button" tabindex="0" title="Return to Dashboard">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none">
+            <rect x="13" y="2" width="18" height="7" rx="3" stroke="#2f7bff" stroke-width="1.6" fill="rgba(47,123,255,0.12)" />
+            <rect x="13" y="35" width="18" height="7" rx="3" stroke="#2f7bff" stroke-width="1.6" fill="rgba(47,123,255,0.12)" />
+            <rect x="8" y="8" width="28" height="28" rx="9" stroke="#00f0ff" stroke-width="2" fill="rgba(0,240,255,0.08)" />
+            <circle cx="22" cy="22" r="7.5" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 2.5" />
+            <circle cx="22" cy="22" r="3" fill="#00ff88" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title">SMARTWATCH <span class="accent-cyan">X</span></div>
+          <div class="brand-subtitle">DORA UNIFIED HOLOGRAPHIC PROTOTYPE</div>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary Features">
+        <button class="nav-pill active" data-view="dashboard">
+          <span class="nav-dot dot-cyan"></span>Dashboard
+        </button>
+        <button class="nav-pill" data-view="hologram">
+          <span class="nav-dot dot-cyan"></span>Hologram
+        </button>
+        <button class="nav-pill" data-view="sos">
+          <span class="nav-dot dot-red"></span>SOS Mode
+        </button>
+        <button class="nav-pill" data-view="payment">
+          <span class="nav-dot dot-green"></span>Universal Payment
+        </button>
+        <button class="nav-pill" data-view="transform">
+          <span class="nav-dot dot-blue"></span>Self-Transforming
+        </button>
+      </nav>
+
+      <div class="header-status">
+        <div id="global-status-pill" class="status-pill status-online">
+          <span class="pulse-dot"></span>
+          <span id="global-status-text">SYSTEM ONLINE</span>
+        </div>
+        <div class="header-meta">
+          <span id="header-clock" class="mono">00:00:00</span>
+          <span class="meta-sep">•</span>
+          <span id="header-battery" class="mono">87%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== VIEW 0: MAIN UNIFIED DASHBOARD ==================== -->
+    <main class="main-content">
+      <section id="view-dashboard" class="view-section active">
+        <div class="dashboard-layout">
+          <!-- Left Column: Live Smartwatch Preview -->
+          <aside class="preview-column glass-card">
+            <div class="card-kicker">
+              <span class="kicker-dot dot-cyan"></span>
+              LIVE SMARTWATCH PREVIEW
+            </div>
+
+            <div class="live-watch-stage">
+              <div class="watch-holo-rings" aria-hidden="true">
+                <div class="holo-ring ring-1"></div>
+                <div class="holo-ring ring-2"></div>
+              </div>
+
+              <div class="preview-watch-hardware" id="preview-watch-hardware">
+                <div class="watch-strap strap-top"></div>
+                <div class="watch-case">
+                  <div class="watch-crown"></div>
+                  <div class="watch-side-btn"></div>
+                  <div class="watch-display">
+                    <div class="wd-top">
+                      <span class="wd-badge" id="preview-mode-badge">OS READY</span>
+                      <span class="wd-batt mono" id="preview-batt">87%</span>
+                    </div>
+
+                    <div class="wd-time mono" id="preview-time">00:00</div>
+                    <div class="wd-date mono" id="preview-date">DEMO TELEMETRY</div>
+
+                    <div class="wd-ecg-wrap">
+                      <canvas id="preview-ecg-canvas" width="160" height="34"></canvas>
+                    </div>
+
+                    <div class="wd-metrics">
+                      <div class="wd-metric">
+                        <span class="wd-label">BPM</span>
+                        <span class="wd-val accent-cyan mono" id="preview-bpm">76</span>
+                      </div>
+                      <div class="wd-metric">
+                        <span class="wd-label">WALLET</span>
+                        <span class="wd-val accent-green mono" id="preview-wallet">₹500</span>
+                      </div>
+                    </div>
+
+                    <div class="wd-quick-dots">
+                      <button class="wd-dot-btn" data-open="hologram" title="Hologram">3D</button>
+                      <button class="wd-dot-btn wd-dot-red" data-open="sos" title="SOS Mode">SOS</button>
+                      <button class="wd-dot-btn wd-dot-green" data-open="payment" title="Universal Payment">PAY</button>
+                      <button class="wd-dot-btn wd-dot-blue" data-open="transform" title="Self-Transforming">MOD</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="watch-strap strap-bottom"></div>
+              </div>
+            </div>
+
+            <div class="preview-telemetry-grid">
+              <div class="mini-stat">
+                <span class="mini-stat-label">HOLOGRAM ENGINE</span>
+                <span class="mini-stat-val accent-cyan" id="dash-stat-holo">16 MESHES READY</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-stat-label">SOS BEACON</span>
+                <span class="mini-stat-val accent-green" id="dash-stat-sos">STANDBY · 3 ICE</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-stat-label">DORA PAYMENT</span>
+                <span class="mini-stat-val accent-green" id="dash-stat-pay">₹--.-- READY</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-stat-label">MODULAR FRAME</span>
+                <span class="mini-stat-val accent-blue" id="dash-stat-mod">LOCKED · 6 MODS</span>
+              </div>
+            </div>
+
+            <div class="demo-footnote">
+              Localhost prototype · Health, GPS, alerts &amp; payments run in local demo mode.
+            </div>
+          </aside>
+
+          <!-- Right Column: Balanced 2x2 Feature Cards Grid -->
+          <div class="cards-column">
+            <div class="dashboard-intro">
+              <div>
+                <h1 class="hero-heading">Unified Smartwatch Control Hub</h1>
+                <p class="hero-sub">
+                  Select any core subsystem below to launch its interactive module inside this single application.
+                </p>
+              </div>
+              <div class="hub-badge-group">
+                <span class="chip chip-cyan">4 INTEGRATED MODULES</span>
+                <span class="chip chip-green">LOCALHOST :8000</span>
+              </div>
+            </div>
+
+            <div class="feature-grid-2x2">
+              <!-- Card 1: HOLOGRAM -->
+              <article class="feature-card card-cyan glass-card" data-open="hologram" tabindex="0" role="button">
+                <div class="feature-card-top">
+                  <div class="feature-icon icon-cyan">
+                    <svg viewBox="0 0 36 36" fill="none">
+                      <polygon points="18,4 31,11.5 31,24.5 18,32 5,24.5 5,11.5" stroke="#00f0ff" stroke-width="1.8" fill="rgba(0,240,255,0.08)" />
+                      <polyline points="5,11.5 18,19 31,11.5" stroke="#00f0ff" stroke-width="1.5" />
+                      <line x1="18" y1="19" x2="18" y2="32" stroke="#00f0ff" stroke-width="1.5" />
+                      <circle cx="18" cy="18" r="3" fill="#00f0ff" />
+                    </svg>
+                  </div>
+                  <span class="status-badge badge-cyan" id="card-status-hologram">
+                    <span class="b-dot"></span>3D READY
+                  </span>
+                </div>
+                <div class="feature-card-body">
+                  <div class="feature-index mono">MODULE 01 // HOLOWATCH</div>
+                  <h2 class="feature-title">HOLOGRAM</h2>
+                  <p class="feature-desc">
+                    Interactive 3D holographic watch projection powered by procedural watch meshes, live screen texture, particles, scanner, X-ray internals, and 360° orbit.
+                  </p>
+                </div>
+                <div class="feature-card-footer">
+                  <span class="feature-meta mono" id="card-meta-hologram">76 BPM · 98% SpO2</span>
+                  <span class="feature-cta">Open Module →</span>
+                </div>
+              </article>
+
+              <!-- Card 2: SOS MODE -->
+              <article class="feature-card card-red glass-card" data-open="sos" tabindex="0" role="button">
+                <div class="feature-card-top">
+                  <div class="feature-icon icon-red">
+                    <svg viewBox="0 0 36 36" fill="none">
+                      <circle cx="18" cy="18" r="13" stroke="#ff2a4d" stroke-width="1.8" stroke-dasharray="4 3" />
+                      <circle cx="18" cy="18" r="8" stroke="#ff2a4d" stroke-width="1.8" fill="rgba(255,42,77,0.15)" />
+                      <path d="M18 13v6M18 22.5h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round" />
+                    </svg>
+                  </div>
+                  <span class="status-badge badge-red" id="card-status-sos">
+                    <span class="b-dot"></span>STANDBY
+                  </span>
+                </div>
+                <div class="feature-card-body">
+                  <div class="feature-index mono">MODULE 02 // NEON SOS</div>
+                  <h2 class="feature-title">SOS MODE</h2>
+                  <p class="feature-desc">
+                    Hold-to-activate emergency watch with 5-second safety countdown, instant cancellation, simulated GPS beacon, ICE contact dispatch, and persistent event logs.
+                  </p>
+                </div>
+                <div class="feature-card-footer">
+                  <span class="feature-meta mono" id="card-meta-sos">3 ICE CONTACTS LOADED</span>
+                  <span class="feature-cta cta-red">Open Module →</span>
+                </div>
+              </article>
+
+              <!-- Card 3: UNIVERSAL PAYMENT -->
+              <article class="feature-card card-green glass-card" data-open="payment" tabindex="0" role="button">
+                <div class="feature-card-top">
+                  <div class="feature-icon icon-green">
+                    <svg viewBox="0 0 36 36" fill="none">
+                      <rect x="5" y="9" width="26" height="18" rx="4" stroke="#00ff88" stroke-width="1.8" fill="rgba(0,255,136,0.08)" />
+                      <line x1="5" y1="15" x2="31" y2="15" stroke="#00ff88" stroke-width="1.6" />
+                      <path d="M22 20.5a3 3 0 0 1 0 3M25 19a5 5 0 0 1 0 6" stroke="#00f0ff" stroke-width="1.6" stroke-linecap="round" />
+                      <rect x="9" y="20" width="7" height="3" rx="1" fill="#00ff88" />
+                    </svg>
+                  </div>
+                  <span class="status-badge badge-green" id="card-status-payment">
+                    <span class="b-dot"></span>DORA PAY ACTIVE
+                  </span>
+                </div>
+                <div class="feature-card-body">
+                  <div class="feature-index mono">MODULE 03 // DORA-PAYMENTS</div>
+                  <h2 class="feature-title">UNIVERSAL PAYMENT</h2>
+                  <p class="feature-desc">
+                    Integrated DORA contactless payment engine with Watch &amp; Hologram views, Wallet balance, UPI QR generation, NFC tap, 4-digit PIN auth, and live ledger.
+                  </p>
+                </div>
+                <div class="feature-card-footer">
+                  <span class="feature-meta mono" id="card-meta-payment">BALANCE ₹--.--</span>
+                  <span class="feature-cta cta-green">Open Module →</span>
+                </div>
+              </article>
+
+              <!-- Card 4: SELF-TRANSFORMING -->
+              <article class="feature-card card-blue glass-card" data-open="transform" tabindex="0" role="button">
+                <div class="feature-card-top">
+                  <div class="feature-icon icon-blue">
+                    <svg viewBox="0 0 36 36" fill="none">
+                      <ellipse cx="18" cy="25" rx="11" ry="5" stroke="#2f7bff" stroke-width="1.8" fill="rgba(47,123,255,0.1)" />
+                      <rect x="11" y="6" width="14" height="11" rx="3.5" stroke="#00f0ff" stroke-width="1.8" fill="rgba(0,240,255,0.12)" />
+                      <path d="M18 17v5M14 19l4-2 4 2" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                  <span class="status-badge badge-blue" id="card-status-transform">
+                    <span class="b-dot"></span>MODULAR LOCK
+                  </span>
+                </div>
+                <div class="feature-card-body">
+                  <div class="feature-index mono">MODULE 04 // MODULAR HARDWARE</div>
+                  <h2 class="feature-title">SELF-TRANSFORMING</h2>
+                  <p class="feature-desc">
+                    Interactive modular smartwatch architecture featuring detachable screen module, circular magnetic wristband, exploded assembly view, and smooth reassembly controls.
+                  </p>
+                </div>
+                <div class="feature-card-footer">
+                  <span class="feature-meta mono" id="card-meta-transform">STAGE 1/5 · ASSEMBLED</span>
+                  <span class="feature-cta cta-blue">Open Module →</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 1: HOLOGRAM PANEL ==================== -->
+      <section id="view-hologram" class="view-section">
+        <div class="panel-topbar">
+          <button class="back-btn" data-view="dashboard">← Back to Dashboard</button>
+          <div class="panel-title-wrap">
+            <span class="panel-tag tag-cyan">MODULE 01 // HOLOWATCH 3D ENGINE</span>
+            <h2 class="panel-heading">Holographic Projection Lab</h2>
+          </div>
+          <div class="panel-actions">
+            <span class="chip chip-cyan" id="holo-status-chip">PROJECTION ONLINE</span>
+          </div>
+        </div>
+
+        <div class="holo-layout">
+          <!-- Left: Projection Controls -->
+          <div class="glass-card side-panel">
+            <div class="section-label">PROJECTION CONTROLS</div>
+
+            <div class="toggle-grid">
+              <button class="ctrl-toggle active" id="holo-btn-projection"><span>Projection</span><b>ON</b></button>
+              <button class="ctrl-toggle" id="holo-btn-wireframe"><span>Wireframe</span><b>OFF</b></button>
+              <button class="ctrl-toggle active" id="holo-btn-particles"><span>Particles</span><b>ON</b></button>
+              <button class="ctrl-toggle active" id="holo-btn-scanning"><span>Scanning</span><b>ON</b></button>
+              <button class="ctrl-toggle" id="holo-btn-xray"><span>X-Ray Internals</span><b>OFF</b></button>
+              <button class="ctrl-toggle" id="holo-btn-explode"><span>Disassemble</span><b>OFF</b></button>
+              <button class="ctrl-toggle" id="holo-btn-inspect"><span>360° Inspect</span><b>OFF</b></button>
+              <button class="ctrl-toggle" id="holo-btn-pause"><span>Pause Spin</span><b>OFF</b></button>
+            </div>
+
+            <div class="slider-group">
+              <label class="slider-label">
+                <span>Hologram Brightness</span>
+                <span class="mono" id="holo-val-brightness">100%</span>
+              </label>
+              <input type="range" id="holo-slider-brightness" min="0.3" max="1.6" step="0.05" value="1.05" />
+
+              <label class="slider-label">
+                <span>Rotation Speed</span>
+                <span class="mono" id="holo-val-speed">22°/s</span>
+              </label>
+              <input type="range" id="holo-slider-speed" min="0" max="110" step="2" value="22" />
+
+              <label class="slider-label">
+                <span>Projection Scale</span>
+                <span class="mono" id="holo-val-size">1.00x</span>
+              </label>
+              <input type="range" id="holo-slider-size" min="0.65" max="1.45" step="0.05" value="1.0" />
+            </div>
+
+            <button class="btn-outline full-w" id="holo-btn-reset">↺ Reset Camera &amp; View</button>
+          </div>
+
+          <!-- Center: Interactive 3D WebGL Viewport -->
+          <div class="glass-card holo-viewport-card">
+            <div class="viewport-hud-top">
+              <span class="mono hud-caption" id="holo-caption">DRAG TO ROTATE 360° · SCROLL TO ZOOM</span>
+              <span class="mono hud-fps" id="holo-mesh-info">16 MESH PARTS</span>
+            </div>
+
+            <div class="holo-canvas-wrap">
+              <canvas id="holo-webgl-canvas"></canvas>
+              <div class="holo-loading" id="holo-loading">Initializing 3D Hologram Projection...</div>
+            </div>
+
+            <div class="holo-screen-bar">
+              <span class="mono screen-bar-label">WATCH OS SCREEN:</span>
+              <div class="page-btn-row" id="holo-page-buttons">
+                <button class="page-chip active" data-page="0">HOME</button>
+                <button class="page-chip" data-page="1">HEALTH</button>
+                <button class="page-chip" data-page="2">FITNESS</button>
+                <button class="page-chip" data-page="3">PAY</button>
+                <button class="page-chip" data-page="4">BIO</button>
+                <button class="page-chip" data-page="5">ALERTS</button>
+                <button class="page-chip chip-sos" data-page="6">SOS</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live Telemetry & Watch Screen Preview -->
+          <div class="glass-card side-panel">
+            <div class="section-label">SMARTWATCH TELEMETRY (DEMO)</div>
+            <div class="telemetry-list">
+              <div class="tel-row"><span>Device</span><strong class="mono">SmartWatch X</strong></div>
+              <div class="tel-row"><span>Heart Rate</span><strong class="mono accent-cyan" id="holo-tel-bpm">76 BPM</strong></div>
+              <div class="tel-row"><span>Blood Oxygen</span><strong class="mono accent-green" id="holo-tel-spo2">98%</strong></div>
+              <div class="tel-row"><span>Skin Temp</span><strong class="mono" id="holo-tel-temp">36.6°C</strong></div>
+              <div class="tel-row"><span>Daily Steps</span><strong class="mono" id="holo-tel-steps">6,245</strong></div>
+              <div class="tel-row"><span>Battery</span><strong class="mono accent-cyan" id="holo-tel-batt">87%</strong></div>
+            </div>
+
+            <div class="ecg-box">
+              <div class="ecg-header">
+                <span class="mono">LIVE ECG STREAM</span>
+                <span class="mono accent-green">60 Hz</span>
+              </div>
+              <canvas id="holo-ecg-canvas" width="260" height="64"></canvas>
+            </div>
+
+            <div class="section-label" style="margin-top:14px;">LIVE SCREEN TEXTURE</div>
+            <div class="holo-screen-mirror">
+              <img id="holo-screen-preview" alt="Live SmartWatch X Screen" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 2: SOS MODE PANEL ==================== -->
+      <section id="view-sos" class="view-section">
+        <div class="panel-topbar">
+          <button class="back-btn" data-view="dashboard">← Back to Dashboard</button>
+          <div class="panel-title-wrap">
+            <span class="panel-tag tag-red">MODULE 02 // NEON SOS EMERGENCY DISPATCH</span>
+            <h2 class="panel-heading">Emergency SOS Simulation</h2>
+          </div>
+          <div class="panel-actions">
+            <span class="chip chip-red" id="sos-header-chip">STATE: NORMAL</span>
+          </div>
+        </div>
+
+        <div class="sos-layout">
+          <!-- Left: Interactive Neon SOS Watch Canvas -->
+          <div class="glass-card sos-watch-card">
+            <canvas id="sos-watch-canvas" width="360" height="540"></canvas>
+            <div class="sos-canvas-hint mono">
+              HOLD RED SOS BUTTON FOR 1 SECOND · PRESS ESC OR CANCEL DURING COUNTDOWN
+            </div>
+          </div>
+
+          <!-- Right: Holographic SOS Command Dashboard -->
+          <div class="sos-console-col">
+            <!-- State Flow Strip -->
+            <div class="glass-card sos-section">
+              <div class="section-label">SOS WORKFLOW STATE</div>
+              <div class="sos-flow-strip" id="sos-flow-strip">
+                <div class="flow-pill active-normal" data-sos-state="NORMAL">NORMAL</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-pill" data-sos-state="TRIGGERED">TRIGGERED</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-pill" data-sos-state="COUNTDOWN">COUNTDOWN</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-pill" data-sos-state="ACTIVE">ACTIVE</div>
+                <div class="flow-sep">|</div>
+                <div class="flow-pill" data-sos-state="CANCELLED">CANCELLED</div>
+              </div>
+              <div class="sos-quick-controls">
+                <button class="btn-danger" id="sos-btn-hold-sim">⚡ Hold / Trigger Demo SOS</button>
+                <button class="btn-cyan" id="sos-btn-cancel-ext" disabled>✕ Cancel Countdown (Esc)</button>
+                <button class="btn-outline" id="sos-btn-reset-ext" disabled>↺ Reset SOS</button>
+              </div>
+            </div>
+
+            <!-- Emergency Contacts loaded from neon_sos/contacts.txt -->
+            <div class="glass-card sos-section">
+              <div class="section-label">EMERGENCY CONTACTS (neon_sos/contacts.txt)</div>
+              <div class="contacts-grid" id="sos-contacts-grid"></div>
+            </div>
+
+            <!-- GPS + Alerts side by side -->
+            <div class="sos-split-row">
+              <div class="glass-card sos-section">
+                <div class="section-label accent-cyan">GPS LOCATION [SIMULATED]</div>
+                <div class="gps-coords mono" id="sos-gps-lat">LAT  12.97160 N</div>
+                <div class="gps-coords mono" id="sos-gps-lon">LON  77.59460 E</div>
+                <div class="gps-sub mono" id="sos-gps-updated">Sample data — no real GPS hardware</div>
+                <button class="btn-cyan" id="sos-btn-update-gps" style="margin-top:10px;">
+                  ◎ UPDATE LOCATION
+                </button>
+              </div>
+
+              <div class="glass-card sos-section">
+                <div class="section-label accent-red">ALERTS [DEMO MODE]</div>
+                <div class="alerts-box mono" id="sos-alerts-box">
+                  STANDBY — No alerts prepared.<br />Alerts appear here when SOS becomes active and are saved to neon_sos/sos_outbox.txt.
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Event Log -->
+            <div class="glass-card sos-section">
+              <div class="log-head">
+                <div class="section-label" style="margin-bottom:0;">EVENT LOG (neon_sos/sos_log.txt)</div>
+                <span class="mono muted-sm" id="sos-outbox-badge">Outbox alerts: 0</span>
+              </div>
+              <div class="sos-log-box mono" id="sos-log-box"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 3: UNIVERSAL PAYMENT PANEL ==================== -->
+      <section id="view-payment" class="view-section">
+        <div class="panel-topbar">
+          <button class="back-btn" data-view="dashboard">← Back to Dashboard</button>
+          <div class="panel-title-wrap">
+            <span class="panel-tag tag-green">MODULE 03 // DORA UNIVERSAL PAYMENT (EXISTING BACKEND)</span>
+            <h2 class="panel-heading">DORA Universal Payment Mode</h2>
+          </div>
+          <div class="panel-actions">
+            <div class="mode-switch-group" role="group" aria-label="Payment Display Mode">
+              <button class="mode-switch-btn active" data-pay-mode="watch">Watch UI (Round)</button>
+              <button class="mode-switch-btn" data-pay-mode="hologram">Hologram Simulation</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pay-layout">
+          <!-- Left: Existing DORA Watch / Hologram Payment Viewport -->
+          <div class="glass-card pay-viewport-host" id="pay-viewport-host" data-mode="watch">
+            <div class="dora-pay-viewport">
+              <!-- Screen 1: Home / Wallet Balance -->
+              <div id="pay-screen-home" class="pay-screen active">
+                <div>
+                  <div class="pay-badge">DORA PAY</div>
+                  <div class="pay-bal-title">Wallet Balance</div>
+                  <div class="pay-bal-amount mono" id="pay-wallet-val">₹--.--</div>
+                </div>
+
+                <div class="pay-home-actions">
+                  <button class="pay-btn pay-btn-primary" id="pay-quick-cafe">
+                    ⚡ Pay ₹150 (Tap)
+                  </button>
+                  <button class="pay-btn" id="pay-quick-metro">
+                    📶 Metro ₹45 (NFC)
+                  </button>
+                  <button class="pay-btn" id="pay-quick-topup">
+                    + Add ₹500
+                  </button>
+                </div>
+
+                <div class="pay-pin-hint mono">PIN: 1234 (Demo)</div>
+              </div>
+
+              <!-- Screen 2: PIN Authorization -->
+              <div id="pay-screen-pin" class="pay-screen">
+                <div class="pay-pin-header">
+                  <div id="pay-confirm-merchant" class="pay-confirm-merchant">Merchant</div>
+                  <div id="pay-confirm-amt" class="pay-confirm-amt mono">₹0.00</div>
+                  <div id="pay-confirm-method" class="pay-confirm-method mono">WALLET</div>
+                  <div id="pay-pin-dots" class="pay-pin-dots mono"></div>
+                  <div id="pay-pin-error" class="pay-pin-error"></div>
+                </div>
+
+                <div class="pay-keypad" id="pay-keypad">
+                  <button class="pay-key" data-key="1">1</button>
+                  <button class="pay-key" data-key="2">2</button>
+                  <button class="pay-key" data-key="3">3</button>
+                  <button class="pay-key" data-key="4">4</button>
+                  <button class="pay-key" data-key="5">5</button>
+                  <button class="pay-key" data-key="6">6</button>
+                  <button class="pay-key" data-key="7">7</button>
+                  <button class="pay-key" data-key="8">8</button>
+                  <button class="pay-key" data-key="9">9</button>
+                  <button class="pay-key key-clear" data-key="C">✕</button>
+                  <button class="pay-key" data-key="0">0</button>
+                  <button class="pay-key key-ok" data-key="OK">OK</button>
+                </div>
+
+                <button class="pay-btn pay-btn-danger pay-cancel-btn" id="pay-btn-cancel">Cancel</button>
+              </div>
+
+              <!-- Screen 3: Payment Success Confirmation -->
+              <div id="pay-screen-success" class="pay-screen">
+                <div class="pay-success-pulse">
+                  <span>✓</span>
+                </div>
+                <div>
+                  <div class="pay-success-title">Payment Successful</div>
+                  <div id="pay-success-amt" class="pay-success-amt mono">₹0.00</div>
+                  <div id="pay-success-merchant" class="pay-success-merchant">Merchant</div>
+                  <div id="pay-success-txnid" class="pay-success-txnid mono">TXN</div>
+                </div>
+                <button class="pay-btn pay-btn-primary" id="pay-btn-done" style="width:140px;">Done</button>
+              </div>
+            </div>
+
+            <div class="pay-manifest-strip mono" id="pay-manifest-strip">
+              Limits: ₹5,000/txn · ₹20,000/day · SQLite Persisted
+            </div>
+          </div>
+
+          <!-- Right: Payment Methods (Wallet / QR / NFC) & Live Transaction Ledger -->
+          <div class="pay-console-col">
+            <div class="glass-card pay-section">
+              <div class="pay-method-tabs">
+                <button class="method-tab active" data-pay-tab="wallet">⚡ Wallet &amp; Custom</button>
+                <button class="method-tab" data-pay-tab="qr">▦ UPI QR Code</button>
+                <button class="method-tab" data-pay-tab="nfc">📶 NFC Contactless Tap</button>
+              </div>
+
+              <!-- Tab 1: Wallet & Custom Payment -->
+              <div class="method-pane active" id="pay-pane-wallet">
+                <div class="custom-pay-form">
+                  <div class="form-field">
+                    <label>Merchant Name</label>
+                    <input type="text" id="pay-custom-merchant" value="Dora Cyber Cafe" />
+                  </div>
+                  <div class="form-field">
+                    <label>UPI VPA (Optional)</label>
+                    <input type="text" id="pay-custom-vpa" value="cybercafe@upi" />
+                  </div>
+                  <div class="form-field">
+                    <label>Amount (₹ INR)</label>
+                    <input type="number" id="pay-custom-amount" value="125" min="1" max="5000" step="1" />
+                  </div>
+                  <div class="form-field">
+                    <label>Method</label>
+                    <select id="pay-custom-method">
+                      <option value="WALLET">WALLET</option>
+                      <option value="UPI_QR">UPI_QR</option>
+                      <option value="NFC_TAP">NFC_TAP</option>
+                      <option value="SIMULATED_CARD">SIMULATED_CARD</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pay-form-actions">
+                  <button class="btn-green" id="pay-btn-custom-submit">Initiate Payment → Enter PIN</button>
+                  <button class="btn-outline" id="pay-btn-topup-side">+ Top Up ₹500</button>
+                </div>
+              </div>
+
+              <!-- Tab 2: UPI QR Code (reuses backend QRService & qrcode) -->
+              <div class="method-pane" id="pay-pane-qr">
+                <div class="qr-grid">
+                  <div class="qr-preview-box">
+                    <img id="pay-qr-img" alt="Generated UPI QR Code" />
+                    <div class="mono muted-sm" id="pay-qr-status">Generating UPI QR...</div>
+                  </div>
+                  <div class="qr-controls">
+                    <div class="section-label">UPI QR PAYLOAD (QRService)</div>
+                    <div class="qr-uri-box mono" id="pay-qr-uri">upi://pay?...</div>
+                    <div class="qr-btn-row">
+                      <button class="btn-cyan" id="pay-btn-refresh-qr">↻ Refresh QR</button>
+                      <button class="btn-green" id="pay-btn-scan-qr">◎ Scan &amp; Pay via UPI QR</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 3: NFC Contactless Tap (reuses backend SimulatedNFC) -->
+              <div class="method-pane" id="pay-pane-nfc">
+                <div class="nfc-stage">
+                  <div class="nfc-pad" id="pay-nfc-pad" role="button" tabindex="0">
+                    <div class="nfc-wave w1"></div>
+                    <div class="nfc-wave w2"></div>
+                    <div class="nfc-core mono">TAP NFC</div>
+                  </div>
+                  <div class="nfc-info">
+                    <div class="section-label">SIMULATED NFC TERMINAL</div>
+                    <div class="mono nfc-details" id="pay-nfc-details">
+                      Click the contactless NFC pad to simulate tapping SmartWatch X against a POS terminal.
+                    </div>
+                    <button class="btn-green" id="pay-btn-nfc-trigger" style="margin-top:10px;">
+                      📶 Emulate NFC Tap (₹45 Metro)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Transaction History -->
+            <div class="glass-card pay-section">
+              <div class="log-head">
+                <div class="section-label" style="margin-bottom:0;">RECENT TRANSACTIONS (LIVE API)</div>
+                <button class="btn-mini" id="pay-btn-refresh-txns">↻ Refresh</button>
+              </div>
+              <div class="txn-table-wrap">
+                <table class="txn-table">
+                  <thead>
+                    <tr>
+                      <th>Merchant</th>
+                      <th>Method</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pay-txn-tbody">
+                    <tr><td colspan="4" class="muted-sm">Loading transactions...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 4: SELF-TRANSFORMING PANEL ==================== -->
+      <section id="view-transform" class="view-section">
+        <div class="panel-topbar">
+          <button class="back-btn" data-view="dashboard">← Back to Dashboard</button>
+          <div class="panel-title-wrap">
+            <span class="panel-tag tag-blue">MODULE 04 // MODULAR SELF-TRANSFORMING ARCHITECTURE</span>
+            <h2 class="panel-heading">Modular Smartwatch Assembly Studio</h2>
+          </div>
+          <div class="panel-actions">
+            <span class="chip chip-blue" id="tf-stage-chip">STAGE 1 / 5 · ASSEMBLED</span>
+          </div>
+        </div>
+
+        <div class="tf-layout">
+          <!-- Main Modular Watch Viewport -->
+          <div class="glass-card tf-viewport-card">
+            <div class="viewport-hud-top">
+              <span class="mono hud-caption" id="tf-hud-status">MAGNETIC LOCK ENGAGED · DRAG TO ORBIT VIEW</span>
+              <span class="mono accent-cyan" id="tf-explode-readout">SEPARATION: 0%</span>
+            </div>
+
+            <div class="tf-canvas-wrap">
+              <canvas id="tf-canvas" width="900" height="520"></canvas>
+            </div>
+
+            <!-- Stage Stepper -->
+            <div class="tf-stepper" id="tf-stepper">
+              <button class="step-pill active" data-stage="0"><span>01</span> Assembled</button>
+              <button class="step-pill" data-stage="1"><span>02</span> Unlock</button>
+              <button class="step-pill" data-stage="2"><span>03</span> Detach Screen</button>
+              <button class="step-pill" data-stage="3"><span>04</span> Exploded View</button>
+              <button class="step-pill" data-stage="4"><span>05</span> Reassemble</button>
+            </div>
+
+            <!-- Playback & Scrub Controls -->
+            <div class="tf-controls-bar">
+              <div class="tf-btn-group">
+                <button class="btn-cyan" id="tf-btn-start">▶ Start</button>
+                <button class="btn-outline" id="tf-btn-pause">⏸ Pause</button>
+                <button class="btn-outline" id="tf-btn-prev">⏮ Previous</button>
+                <button class="btn-outline" id="tf-btn-next">⏭ Next</button>
+                <button class="btn-outline" id="tf-btn-reset">↺ Reset</button>
+              </div>
+              <div class="tf-scrub-wrap">
+                <label class="mono muted-sm" for="tf-slider-explode">MANUAL EXPLODE</label>
+                <input type="range" id="tf-slider-explode" min="0" max="100" value="0" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Active Stage Details & 6 Hardware Modules Inspector -->
+          <div class="tf-side-col">
+            <div class="glass-card tf-info-card">
+              <div class="section-label">CURRENT TRANSFORMATION PHASE</div>
+              <h3 class="tf-stage-title" id="tf-stage-title">Assembled Wearable Mode</h3>
+              <p class="tf-stage-sub" id="tf-stage-sub">Unified smartwatch locked into the circular magnetic wristband.</p>
+              <p class="tf-stage-detail" id="tf-stage-detail">
+                All 6 modular subsystems are docked seamlessly.
+              </p>
+              <div class="tf-lock-banner" id="tf-lock-banner">
+                <span class="lock-indicator locked"></span>
+                <span id="tf-lock-text" class="mono">CIRCULAR WRISTBAND DOCK: LOCKED</span>
+              </div>
+            </div>
+
+            <div class="glass-card tf-modules-card">
+              <div class="section-label">MODULAR COMPONENTS (CLICK TO HIGHLIGHT)</div>
+              <div class="module-list" id="tf-module-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Reuse existing DORA Payment API client directly -->
+  <script src="/payment-static/js/api.js"></script>
+  <!-- Unified feature modules -->
+  <script src="/assets/js/hologram3d.js"></script>
+  <script src="/assets/js/sos.js"></script>
+  <script src="/assets/js/payments.js"></script>
+  <script src="/assets/js/transform.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

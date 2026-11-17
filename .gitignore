@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vercel/
+*.db
+dora-payments/backend/app/**/__pycache__/
+dora-payments/backend/tests/__pycache__/
+holowatch/__pycache__/
+tests/__pycache__/
+
