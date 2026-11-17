@@ -41,9 +41,13 @@ if ROOT_DIR not in sys.path:
 if DORA_BACKEND_DIR not in sys.path:
     sys.path.insert(0, DORA_BACKEND_DIR)
 
-# Point dora-payments SQLite DB to the existing database file regardless of cwd
+# Use writable temporary storage on Vercel's read-only serverless filesystem.
 if not os.environ.get("DATABASE_URL"):
-    db_path = os.path.join(DORA_DIR, "dora_payments.db").replace("\\", "/")
+    db_path = (
+        "/tmp/dora_payments.db"
+        if os.environ.get("VERCEL") == "1"
+        else os.path.join(DORA_DIR, "dora_payments.db").replace("\\", "/")
+    )
     os.environ["DATABASE_URL"] = f"sqlite:///{db_path}"
 
 # Reuse existing DORA Universal Payment backend modules directly (zero duplication)
